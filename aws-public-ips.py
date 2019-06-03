@@ -7,6 +7,8 @@ import argparse
 # Parse flags
 parser = argparse.ArgumentParser(description='Collects public IPs from AWS accounts .')
 parser.add_argument('--role-name', metavar='-r', type=str, help='AWS IAM role to assume in Linked accounts.')
+parser.add_argument('--output-file', metavar='-o', type=str, help='Path and filename to use for CSV output.')
+parser.set_defaults(role_name='OrganizationAccountAccessRole', output_file='./ips.csv')
 args = parser.parse_args()
 
 # Set the role name you intend to use across linked accounts
@@ -14,7 +16,7 @@ args = parser.parse_args()
 role_name = args.role_name
 
 # CSV File path
-csvFilePath = './ips.csv'
+csvFilePath = args.output_file
 
 # Initialize the ipList variable as an array
 ipList = []
@@ -84,6 +86,6 @@ for i in accountList:
     # Get IPs and append them to the list
     getEC2(i, credentials)
 
-print("Writing CSV file to ./ips.csv")
+print("Writing CSV file to " + csvFilePath)
 writeToCSV(ipList)
 print("Done")

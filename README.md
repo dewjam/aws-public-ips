@@ -21,6 +21,6 @@ git clone git@github.com:dewjam/aws-public-ips.git
 ```
 1. Run the script
 ```
-python3 aws-public-ips.py --role-name <role_name> ('OrganizationAccountAccessRole')
+python3 aws-public-ips.py --role-name <role_name> --output-file <csv_file_name>
 ```
-1. Review the CSV file.  The file will be saved to the current directory with name `ips.csv`.
+1. Review the CSV file.  The file will be saved to the path specified in the `--output-file` flag (Default is `./ips.csv`)
